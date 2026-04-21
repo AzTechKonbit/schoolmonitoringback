@@ -32,10 +32,11 @@ class AuthController extends BaseApiController
 
     public function login(Request $request): JsonResponse
     {
-        $result = $this->authService->login(
-            $request->email,
-            $request->password
-        );
+        $validate = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required|string',
+            ]);
+        $result = $this->authService->login($validate["email"], $validate["password"]);
 
         if (!$result) {
             return $this->error('Invalid credentials', 401);
