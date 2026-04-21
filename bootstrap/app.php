@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Laravel\Sanctum\PersonalAccessToken;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -10,9 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware) {
-        //
+    ->withSchedule(callback :  function (Schedule $schedule) {
+        $schedule->call(function () {
+            PersonalAccessToken::where('last_used_at', '<', now()->subDays(30))
+                ->delete();
+        })->daily();
     })
-    ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+    ->create();
