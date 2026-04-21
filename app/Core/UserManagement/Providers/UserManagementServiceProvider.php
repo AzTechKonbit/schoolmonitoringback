@@ -2,7 +2,9 @@
 
 namespace App\Core\UserManagement\Providers;
 
+use App\Core\Models\User;
 use App\Core\UserManagement\Database\Seeders\UserManagementSeeder;
+use App\Core\UserManagement\Relations\ProfileRelation;
 use Illuminate\Support\ServiceProvider;
 
 class UserManagementServiceProvider extends ServiceProvider
@@ -17,6 +19,7 @@ class UserManagementServiceProvider extends ServiceProvider
         $this->registerMigrations();
         $this->registerRoutes();
         $this->registerSeeder();
+        $this->registerRelation();
     }
 
     protected function registerMigrations(): void
@@ -36,5 +39,13 @@ class UserManagementServiceProvider extends ServiceProvider
         });
 
         $this->app->tag(UserManagementSeeder::class, 'module.seeders');
+    }
+
+    private function registerRelation()
+    {
+        User::resolveRelationUsing('profile', function ($userModel) {
+            return new ProfileRelation($userModel);
+        });
+
     }
 }
