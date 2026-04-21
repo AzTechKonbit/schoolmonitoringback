@@ -11,10 +11,5 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withSchedule(callback :  function (Schedule $schedule) {
-        $schedule->call(function () {
-            PersonalAccessToken::where('last_used_at', '<', now()->subDays(30))
-                ->delete();
-        })->daily();
-    })
-    ->create();
+    ->withMiddleware(null)
+    ->withExceptions(null)->create();
