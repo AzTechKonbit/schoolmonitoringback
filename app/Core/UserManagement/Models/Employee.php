@@ -2,6 +2,7 @@
 
 namespace App\Core\UserManagement\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Core\Models\{School, User};
 use App\Enums\ContractType;
 use App\Enums\EmploymentStatus;
@@ -56,20 +57,20 @@ class Employee extends Model
         return $this->belongsTo(School::class);
     }
 
-    public function titles(): BelongsToMany
-    {
-        return $this->belongsToMany(Title::class, 'employee_titles', 'employee_id', 'title_id');
-    }
-
-    public function courses(): BelongsToMany
-    {
-        return $this->belongsToMany(Course::class, 'teachers_courses', 'teacher_id', 'course_id');
-    }
-
-    public function attendances(): HasMany
-    {
-        return $this->hasMany(Attendance::class, 'recorded_by');
-    }
+//    public function titles(): BelongsToMany
+//    {
+//        return $this->belongsToMany(Title::class, 'employee_titles', 'employee_id', 'title_id');
+//    }
+//
+//    public function courses(): BelongsToMany
+//    {
+//        return $this->belongsToMany(Course::class, 'teachers_courses', 'teacher_id', 'course_id');
+//    }
+//
+//    public function attendances(): HasMany
+//    {
+//        return $this->hasMany(Attendance::class, 'recorded_by');
+//    }
 
     public function isTeacher(): bool
     {

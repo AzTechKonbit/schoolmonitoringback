@@ -2,6 +2,7 @@
 
 namespace App\Core\UserManagement\Models;
 
+use App\Core\Models\User;
 use App\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;

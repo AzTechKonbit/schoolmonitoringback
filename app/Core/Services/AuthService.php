@@ -23,7 +23,7 @@ class AuthService
                 'school_id' => $data['school_id'] ?? null,
             ]);
 
-            $token = $user->createToken('auth_token')->plainTextToken;
+            $token = $user->createToken('api-token')->plainTextToken;
 
             return [
                 'user' => $user,
@@ -36,11 +36,12 @@ class AuthService
     {
         $user = User::where('email', $email)->first();
 
+
         if (!$user || !Hash::check($password, $user->password)) {
             return null;
         }
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('api-token')->plainTextToken;
 
         return [
             'user' => $user,
@@ -55,34 +56,16 @@ class AuthService
 
     public function refreshToken(User $user): string
     {
-        $user->currentAccessToken()->delete();
-        return $user->createToken('auth_token')->plainTextToken;
+        $this->logout($user);
+        return $user->createToken('api-token')->plainTextToken;
     }
 
     public function getProfile(User $user): array
     {
-        $user->loadExists(['school', 'employee', 'student', 'parent']);
-
+        $user->load(['school', 'profile']);
         return [
             'user' => $user,
-            'profile_type' => $this->getProfileType($user),
         ];
     }
 
-    private function getProfileType(User $user): ?string
-    {
-        if ($user->employee) {
-            return $user->employee->isTeacher() ? 'teacher' : 'employee';
-        }
-
-        if ($user->student) {
-            return 'student';
-        }
-
-        if ($user->parent) {
-            return 'parent';
-        }
-
-        return null;
-    }
 }
