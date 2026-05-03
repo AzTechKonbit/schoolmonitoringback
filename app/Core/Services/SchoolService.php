@@ -38,8 +38,11 @@ class SchoolService
 
     public function getStatistics(School $school): array
     {
+        $students = $school->students();
         return [
-            'students_count' => $school->students()->count(),
+            'students_count' => $students->count(),
+            'students_f_count' => $students->where('gender', 'F')->count(),
+            'students_m_count' => $students->where('gender', 'M')->count(),
             'employees_count' => $school->employees()->count(),
 //            'departments_count' => $school->departments()->count(),
 //            'classes_count' => $school->classes()->count(),

@@ -30,7 +30,7 @@ class StudentController extends BaseApiController
             'email' => 'nullable|email|unique:users,email',
             'password' => 'nullable|string|min:8',
             'phone' => 'nullable|string|max:45',
-            'gender' => 'nullable|string|max:45',
+            'gender' => 'required|string|max:45|IN:F,M',
             'school_id' => 'required|exists:schools,id',
             'dob' => 'required|date',
             'parent_id' => 'nullable|exists:parents,id',
