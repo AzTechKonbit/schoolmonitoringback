@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('last_name', 45);
             $table->string('role', 45)->comment('parent/student/employee');
             $table->string('status', 45)->nullable();
-            $table->string('phone', 45);
+            $table->string('phone', 45)->nullable();
             $table->string('gender', 45)->nullable();
             $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();

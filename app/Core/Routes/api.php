@@ -12,8 +12,7 @@ Route::prefix('auth')->group(function () {
         Route::get('profile', [AuthController::class, 'profile']);
         Route::post('refresh', [AuthController::class, 'refresh']);
     });
+    Route::apiResource('schools', SchoolController::class);
+    Route::get('schools/{id}/statistics', [SchoolController::class, 'statistics']);
 });
-
-Route::apiResource('schools', SchoolController::class);
-Route::get('schools/{id}/statistics', [SchoolController::class, 'statistics']);
 

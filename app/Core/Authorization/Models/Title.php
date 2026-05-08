@@ -2,7 +2,9 @@
 
 namespace App\Core\Authorization\Models;
 
+use App\Core\UserManagement\Models\Employee;
 use App\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Title extends Model
 {
@@ -17,8 +19,8 @@ class Title extends Model
         'updated_at' => 'datetime',
     ];
 
-//    public function employees(): BelongsToMany
-//    {
-//        return $this->belongsToMany(Employee::class, 'employee_titles', 'title_id', 'employee_id');
-//    }
+    public function employees(): BelongsToMany
+    {
+        return $this->belongsToMany(Employee::class, 'employee_titles', 'title_id', 'employee_id');
+    }
 }

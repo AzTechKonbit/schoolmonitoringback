@@ -37,21 +37,10 @@ class Student extends Model
         return $this->belongsTo(School::class);
     }
 
-//    public function classes(): BelongsToMany
-//    {
-//        return $this->belongsToMany(SchoolClass::class, 'classes_students', 'student_id', 'class_id');
-//    }
-//
 //    public function programs(): BelongsToMany
 //    {
 //        return $this->belongsToMany(Program::class, 'program_student', 'student_id', 'idprogram');
 //    }
-//
-//    public function attendances(): HasMany
-//    {
-//        return $this->hasMany(Attendance::class);
-//    }
-//
 //    public function submissions(): HasMany
 //    {
 //        return $this->hasMany(AssignmentSubmission::class);

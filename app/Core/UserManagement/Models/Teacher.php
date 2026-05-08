@@ -19,23 +19,8 @@ class Teacher extends Model
         return $this->belongsTo(Employee::class);
     }
 
-//    public function courses(): BelongsToMany
-//    {
-//        return $this->belongsToMany(Course::class, 'teachers_courses', 'teacher_id', 'course_id');
-//    }
-//
-//    public function schedules(): HasMany
-//    {
-//        return $this->hasMany(Schedule::class);
-//    }
-//
 //    public function assignments(): HasMany
 //    {
 //        return $this->hasMany(Assignment::class);
-//    }
-//
-//    public function attendances(): HasMany
-//    {
-//        return $this->hasMany(Attendance::class, 'recorded_by');
 //    }
 }

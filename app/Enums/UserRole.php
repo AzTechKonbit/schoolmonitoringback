@@ -7,4 +7,5 @@ enum UserRole: string
     case PARENT = 'parent';
     case STUDENT = 'student';
     case EMPLOYEE = 'employee';
+    case ADMIN = 'administrator';
 }
