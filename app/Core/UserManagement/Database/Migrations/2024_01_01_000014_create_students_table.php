@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->date('dob');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('parent_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('parent_id')->nullable()->constrained()->nullOnDelete();
             $table->string('student_number_id', 45)->unique();
             $table->foreignId('school_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();

@@ -50,7 +50,6 @@ class UserService
                 'role' => $data['role'] ?? UserRole::EMPLOYEE,
                 'address' => $data['address'] ?? null,
                 'status' => $data['status'] ?? 'active',
-                'school_id' => $data['school_id'],
             ]);
 
             return $user;

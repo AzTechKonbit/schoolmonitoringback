@@ -3,7 +3,7 @@
 namespace App\Core\Database\Factories;
 
 use App\Core\Models\{School, User};
-use App\Enums\{Status, UserRole};
+use App\Enums\{SexeRole, Status, UserRole};
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -14,17 +14,15 @@ class UserFactory extends Factory
 
     public function definition(): array
     {
-        $school = School::inRandomOrder()->value('uuid');
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => Hash::make('password123'),
             'phone' => $this->faker->phoneNumber(),
-            'gender' => collect(['M', 'F'])->random(),
-            'role' => collect(UserRole::class)->random(),
-            'status' => collect(Status::class)->random(),
-            'school_id' => $school,
+            'gender' => collect(SexeRole::cases())->random(),
+            'role' => collect(UserRole::cases())->random(),
+            'status' => collect(Status::cases())->random(),
             'remember_token' => Str::random(10),
         ];
     }

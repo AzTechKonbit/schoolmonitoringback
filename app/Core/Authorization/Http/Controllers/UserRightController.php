@@ -16,7 +16,7 @@ class UserRightController extends BaseApiController
     {
     }
 
-    public function assign(Request $request, int $userId): JsonResponse
+    public function assign(Request $request, string $userId): JsonResponse
     {
         $user = User::find($userId);
 
@@ -32,7 +32,7 @@ class UserRightController extends BaseApiController
         return $this->success($user->fresh('rights'), 'Right assigned successfully');
     }
 
-    public function remove(Request $request, int $userId): JsonResponse
+    public function remove(Request $request, string $userId): JsonResponse
     {
         $user = User::find($userId);
 
@@ -48,7 +48,7 @@ class UserRightController extends BaseApiController
         return $this->success($user->fresh('rights'), 'Right removed successfully');
     }
 
-    public function sync(Request $request, int $userId): JsonResponse
+    public function sync(Request $request, string $userId): JsonResponse
     {
         $user = User::find($userId);
 

@@ -50,4 +50,9 @@ class School extends Model
     {
         return $this->hasMany(Employee::class);
     }
+
+    protected static function newFactory()
+    {
+        return \App\Core\Database\Factories\SchoolFactory::new();
+    }
 }

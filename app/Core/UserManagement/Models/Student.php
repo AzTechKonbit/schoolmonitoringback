@@ -45,4 +45,8 @@ class Student extends Model
 //    {
 //        return $this->hasMany(AssignmentSubmission::class);
 //    }
+    protected static function newFactory()
+    {
+        return \App\Core\UserManagement\Database\Factories\StudentFactory::new();
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Core\Authorization\Models;
 
 use App\Core\Models\User;
+use App\Core\UserManagement\Models\EmployeeType;
 use App\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -27,5 +28,9 @@ class Right extends Model
     public function employeeTypes(): BelongsToMany
     {
         return $this->belongsToMany(EmployeeType::class, 'group_rights', 'right_id', 'employee_type_id');
+    }
+    protected static function newFactory()
+    {
+        return \App\Core\Authorization\Database\Factories\RightFactory::new();
     }
 }

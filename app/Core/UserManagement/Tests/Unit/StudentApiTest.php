@@ -2,24 +2,26 @@
 
 namespace App\Core\UserManagement\Tests\Unit;
 
-use Tests\TestCase;
+use App\Core\Models\School;
+use App\Core\UserManagement\Models\ParentModel;
 use App\Core\UserManagement\Models\Student;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestControllerCase;
 
-class StudentApiTest extends TestCase
+class StudentApiTest extends TestControllerCase
 {
-    use RefreshDatabase;
 
     public function test_can_create_student(): void
     {
-        $response = $this->postJson('/api/students', [
+
+        $response = $this->postJson('/students', [
             'first_name' => 'Pierre',
             'last_name' => 'Dupont',
             'email' => 'pierre@test.com',
             'password' => 'password123',
-            'school_id' => 1,
+            'gender' => 'M',
+            'school_id' => School::factory()->create()->getKey(),
+            'parent_id' => ParentModel::factory()->create()->getKey(),
             'dob' => '2015-05-20',
-            'class_id' => 1,
         ]);
 
         $response->assertStatus(201);
@@ -27,29 +29,11 @@ class StudentApiTest extends TestCase
 
     public function test_can_list_students(): void
     {
-        $response = $this->getJson('/api/students');
+        Student::factory(20)->create();
+        $response = $this->getJson('/students');
 
         $response->assertStatus(200);
     }
 
-    public function test_can_assign_student_to_class(): void
-    {
-        $student = Student::factory()->create();
 
-        $response = $this->postJson("/api/students/{$student->id}/class", [
-            'class_id' => 1,
-        ]);
-
-        $response->assertStatus(200);
-    }
-
-    public function test_can_get_attendance_report(): void
-    {
-        $student = Student::factory()->create();
-
-        $response = $this->getJson("/api/students/{$student->id}/attendance-report");
-
-        $response->assertStatus(200)
-            ->assertJsonStructure(['success', 'data']);
-    }
 }

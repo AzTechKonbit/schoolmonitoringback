@@ -16,10 +16,10 @@ class SchoolFactory extends Factory
         $year = (int) $this->faker->dateTimeThisCentury()->format("Y");
         return [
             'name' => 'École ' . Str::random(10),
-            'type' => collect(SchoolType::class)->random(),
+            'type' => collect(SchoolType::cases())->random(),
             'default_language' => 'fr',
             'academic_year' => $year.'-'.$year+1,
-            'status' => collect(Status::class)->random(),
+            'status' => collect(Status::cases())->random(),
         ];
     }
 }

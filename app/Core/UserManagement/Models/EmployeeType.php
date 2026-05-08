@@ -29,4 +29,9 @@ class EmployeeType extends Model
     {
         return $this->hasMany(GroupRight::class);
     }
+
+    protected static function newFactory()
+    {
+        return \App\Core\UserManagement\Database\Factories\EmployeeTypeFactory::new();
+    }
 }

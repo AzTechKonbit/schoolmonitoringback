@@ -23,4 +23,9 @@ class Title extends Model
     {
         return $this->belongsToMany(Employee::class, 'employee_titles', 'title_id', 'employee_id');
     }
+
+    protected static function newFactory()
+    {
+        return \App\Core\Authorization\Database\Factories\TitleFactory::new();
+    }
 }

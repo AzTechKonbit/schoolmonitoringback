@@ -30,4 +30,8 @@ class ParentModel extends Model
     {
         return $this->hasMany(Student::class);
     }
+        protected static function newFactory()
+    {
+        return \App\Core\UserManagement\Database\Factories\ParentFactory::new();
+    }
 }

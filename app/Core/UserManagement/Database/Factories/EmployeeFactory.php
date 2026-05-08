@@ -2,7 +2,8 @@
 
 namespace App\Core\UserManagement\Database\Factories;
 
-use App\Core\UserManagement\Models\{Employee};
+use App\Core\Models\School;
+use App\Core\UserManagement\Models\{Employee, EmployeeType};
 use App\Core\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,10 +20,10 @@ class EmployeeFactory extends Factory
             'employment_contract_type' => 'full-time',
             'salary_type' => 'monthly',
             'base_salary' => rand(300000, 1000000),
-            'employee_type_id' => 1,
+            'employee_type_id' => EmployeeType::factory(),
             'user_id' => User::factory(),
-            'school_id' => 1,
-            'created_by' => 1,
+            'school_id' => School::factory(),
+            'created_by' => User::factory(),
         ];
     }
 }

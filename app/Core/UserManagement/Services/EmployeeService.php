@@ -34,7 +34,7 @@ class EmployeeService
 
     public function findById(int $id): ?Employee
     {
-        return Employee::with(['user', 'employeeType', 'school', 'teacher', 'titles', 'courses'])->find($id);
+        return Employee::with(['user', 'employeeType', 'school', 'teacher', 'titles'])->find($id);
     }
 
     public function create(array $data): Employee

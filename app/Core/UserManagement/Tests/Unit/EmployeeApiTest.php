@@ -2,23 +2,23 @@
 
 namespace App\Core\UserManagement\Tests\Unit;
 
-use Tests\TestCase;
+use App\Core\Models\School;
+use App\Core\UserManagement\Models\EmployeeType;
+use Tests\TestControllerCase;
 use App\Core\UserManagement\Models\Employee;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class EmployeeApiTest extends TestCase
+class EmployeeApiTest extends TestControllerCase
 {
-    use RefreshDatabase;
 
     public function test_can_create_employee(): void
     {
-        $response = $this->postJson('/api/employees', [
+        $response = $this->postJson('/employees', [
             'first_name' => 'Jean',
             'last_name' => 'Koffi',
             'email' => 'jean.koffi@test.com',
             'password' => 'password123',
-            'employee_type_id' => 1,
-            'school_id' => 1,
+            'employee_type_id' => EmployeeType::factory()->create()->getKey(),
+            'school_id' => School::factory()->create()->getKey(),
             'employment_status' => 'active',
             'contract_type' => 'full-time',
             'salary_type' => 'monthly',
@@ -30,16 +30,18 @@ class EmployeeApiTest extends TestCase
 
     public function test_can_list_employees(): void
     {
-        $response = $this->getJson('/api/employees');
+        Employee::factory()->count(20)->create();
+        $response = $this->getJson('/employees');
 
-        $response->assertStatus(200);
+        $response->assertStatus(200)
+            ->assertJsonStructure(['success', 'data', 'meta']);
     }
 
     public function test_can_terminate_employee(): void
     {
         $employee = Employee::factory()->create();
 
-        $response = $this->postJson("/api/employees/{$employee->id}/terminate");
+        $response = $this->postJson("/employees/{$employee->id}/terminate");
 
         $response->assertStatus(200);
     }

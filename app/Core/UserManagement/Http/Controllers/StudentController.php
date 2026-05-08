@@ -45,7 +45,7 @@ class StudentController extends BaseApiController
         return $this->success($student, 'Student created successfully', 201);
     }
 
-    public function show(int $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
         $student = $this->studentService->findById($id);
 
@@ -56,7 +56,7 @@ class StudentController extends BaseApiController
         return $this->success($student);
     }
 
-    public function update(Request $request, int $id): JsonResponse
+    public function update(Request $request, string $id): JsonResponse
     {
         $student = $this->studentService->findById($id);
 
@@ -77,7 +77,7 @@ class StudentController extends BaseApiController
         return $this->success($student, 'Student updated successfully');
     }
 
-    public function destroy(int $id): JsonResponse
+    public function destroy(string $id): JsonResponse
     {
         $student = $this->studentService->findById($id);
 
@@ -89,7 +89,7 @@ class StudentController extends BaseApiController
         return $this->success(null, 'Student deleted successfully');
     }
 
-    public function assignToClass(Request $request, int $id): JsonResponse
+    public function assignToClass(Request $request, string $id): JsonResponse
     {
         $student = $this->studentService->findById($id);
 
@@ -105,7 +105,7 @@ class StudentController extends BaseApiController
         return $this->success($student->fresh('classes'), 'Student assigned to class successfully');
     }
 
-    public function removeFromClass(Request $request, int $id): JsonResponse
+    public function removeFromClass(Request $request, string $id): JsonResponse
     {
         $student = $this->studentService->findById($id);
 
@@ -121,7 +121,7 @@ class StudentController extends BaseApiController
         return $this->success($student->fresh('classes'), 'Student removed from class successfully');
     }
 
-    public function attendanceReport(Request $request, int $id): JsonResponse
+    public function attendanceReport(Request $request, string $id): JsonResponse
     {
         $student = $this->studentService->findById($id);
 
@@ -138,7 +138,7 @@ class StudentController extends BaseApiController
         return $this->success($report);
     }
 
-    public function gradesReport(int $id): JsonResponse
+    public function gradesReport(string $id): JsonResponse
     {
         $student = $this->studentService->findById($id);
 

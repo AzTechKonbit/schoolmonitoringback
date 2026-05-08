@@ -19,17 +19,3 @@ class RightFactory extends Factory
         ];
     }
 }
-
-class TitleFactory extends Factory
-{
-    protected $model = Title::class;
-
-    public function definition(): array
-    {
-        return [
-            'code' => strtoupper(Str::random(3)),
-            'title' => 'Titre ' . $this->faker->jobTitle(),
-            'description' => 'Description',
-        ];
-    }
-}

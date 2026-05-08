@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return "{$this->first_name} {$this->last_name}";
     }
+
+    protected static function newFactory()
+    {
+        return \App\Core\Database\Factories\UserFactory::new();
+    }
 }

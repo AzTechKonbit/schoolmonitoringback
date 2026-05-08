@@ -34,14 +34,13 @@ class UserController extends BaseApiController
             'role' => 'nullable|string',
             'address' => 'nullable|string|max:45',
             'status' => 'nullable|string',
-            'school_id' => 'required|exists:schools,id',
         ]);
 
         $user = $this->userService->create($data);
         return $this->success($user, 'User created successfully', 201);
     }
 
-    public function show(int $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
         $user = $this->userService->findById($id);
 
@@ -52,7 +51,7 @@ class UserController extends BaseApiController
         return $this->success($user);
     }
 
-    public function update(Request $request, int $id): JsonResponse
+    public function update(Request $request, string $id): JsonResponse
     {
         $user = $this->userService->findById($id);
 
@@ -75,7 +74,7 @@ class UserController extends BaseApiController
         return $this->success($user, 'User updated successfully');
     }
 
-    public function destroy(int $id): JsonResponse
+    public function destroy(string $id): JsonResponse
     {
         $user = $this->userService->findById($id);
 

@@ -72,4 +72,8 @@ class Employee extends Model
     {
         return $this->hasOne(Teacher::class);
     }
+    protected static function newFactory()
+    {
+        return \App\Core\UserManagement\Database\Factories\EmployeeFactory::new();
+    }
 }

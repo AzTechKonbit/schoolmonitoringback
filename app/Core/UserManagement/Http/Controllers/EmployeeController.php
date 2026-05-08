@@ -49,7 +49,7 @@ class EmployeeController extends BaseApiController
         return $this->success($employee, 'Employee created successfully', 201);
     }
 
-    public function show(int $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
         $employee = $this->employeeService->findById($id);
 
@@ -60,7 +60,7 @@ class EmployeeController extends BaseApiController
         return $this->success($employee);
     }
 
-    public function update(Request $request, int $id): JsonResponse
+    public function update(Request $request, string $id): JsonResponse
     {
         $employee = $this->employeeService->findById($id);
 
@@ -88,7 +88,7 @@ class EmployeeController extends BaseApiController
         return $this->success($employee, 'Employee updated successfully');
     }
 
-    public function destroy(int $id): JsonResponse
+    public function destroy(string $id): JsonResponse
     {
         $employee = $this->employeeService->findById($id);
 
@@ -100,7 +100,7 @@ class EmployeeController extends BaseApiController
         return $this->success(null, 'Employee deleted successfully');
     }
 
-    public function terminate(int $id): JsonResponse
+    public function terminate(string $id): JsonResponse
     {
         $employee = $this->employeeService->findById($id);
 
@@ -112,7 +112,7 @@ class EmployeeController extends BaseApiController
         return $this->success($employee, 'Employee terminated successfully');
     }
 
-    public function assignCourse(Request $request, int $id): JsonResponse
+    public function assignCourse(Request $request, string $id): JsonResponse
     {
         $employee = $this->employeeService->findById($id);
 
@@ -128,7 +128,7 @@ class EmployeeController extends BaseApiController
         return $this->success($employee->fresh('courses'), 'Course assigned successfully');
     }
 
-    public function removeCourse(Request $request, int $id): JsonResponse
+    public function removeCourse(Request $request, string $id): JsonResponse
     {
         $employee = $this->employeeService->findById($id);
 
