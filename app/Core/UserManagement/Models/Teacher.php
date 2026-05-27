@@ -23,4 +23,8 @@ class Teacher extends Model
 //    {
 //        return $this->hasMany(Assignment::class);
 //    }
+    protected static function newFactory()
+    {
+        return \App\Core\UserManagement\Database\Factories\TeacherFactory::new();
+    }
 }
