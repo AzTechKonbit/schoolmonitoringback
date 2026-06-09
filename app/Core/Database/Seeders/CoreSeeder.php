@@ -12,7 +12,7 @@ class CoreSeeder extends Seeder implements ModuleSeeder
 {
     public function run(): void
     {
-        $school = School::updateOrFail([
+        $school = School::updateOrCreate([
             'name' => 'École Primaire Saint-Jean',
             'academic_year' => '2025-2026',
         ],
@@ -21,7 +21,7 @@ class CoreSeeder extends Seeder implements ModuleSeeder
                 'default_language' => 'fr',
                 'status' => 'active',
             ]);
-        $admin = User::updateOrFail([
+        $admin = User::updateOrCreate([
             'email' => 'admin@school.com',
 
         ],
