@@ -5,6 +5,8 @@ namespace App\Core\UserManagement\Models;
 use App\Core\Models\{School, User};
 use App\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Academic\Models\AssignmentSubmission;
 
 class Student extends Model
 {
@@ -37,13 +39,14 @@ class Student extends Model
         return $this->belongsTo(School::class);
     }
 
+    public function submissions(): HasMany
+    {
+        return $this->hasMany(AssignmentSubmission::class);
+    }
+
 //    public function programs(): BelongsToMany
 //    {
 //        return $this->belongsToMany(Program::class, 'program_student', 'student_id', 'idprogram');
-//    }
-//    public function submissions(): HasMany
-//    {
-//        return $this->hasMany(AssignmentSubmission::class);
 //    }
     protected static function newFactory()
     {

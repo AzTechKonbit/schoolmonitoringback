@@ -3,7 +3,7 @@
 namespace Modules\Academic\Services;
 
 use Modules\Academic\Models\{Schedule, Attendance};
-use Modules\UserManagement\Models\Student;
+use App\Core\UserManagement\Models\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 

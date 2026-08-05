@@ -3,11 +3,13 @@
 namespace App\Core\Models;
 
 use App\Core\Authorization\Models\Right;
+use App\Core\UserManagement\Models\{Employee, ParentModel, Student};
 use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -51,6 +53,21 @@ class User extends Authenticatable
         return $this->belongsTo(School::class);
     }
 
+    public function student(): HasOne
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function employee(): HasOne
+    {
+        return $this->hasOne(Employee::class);
+    }
+
+    public function parent(): HasOne
+    {
+        return $this->hasOne(ParentModel::class, 'user_id');
+    }
+
     public function isAdmin(): bool
     {
         return $this->role === UserRole::EMPLOYEE && $this->hasRight('SUPER_ADMIN');
@@ -66,7 +83,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Right::class, 'user_rights', 'user_id', 'right_id');
     }
 
-    public function fullNameAttribute(): string
+    public function getFullNameAttribute(): string
     {
         return "{$this->first_name} {$this->last_name}";
     }

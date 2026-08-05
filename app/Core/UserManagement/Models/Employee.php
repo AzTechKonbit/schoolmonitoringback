@@ -3,6 +3,7 @@
 namespace App\Core\UserManagement\Models;
 
 use App\Core\Authorization\Models\Title;
+use Modules\Academic\Models\Course;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Core\Models\{School, User};
 use App\Enums\ContractType;
@@ -72,6 +73,12 @@ class Employee extends Model
     {
         return $this->hasOne(Teacher::class);
     }
+
+    public function courses(): BelongsToMany
+    {
+        return $this->belongsToMany(Course::class, 'employees_courses', 'employee_id', 'course_id');
+    }
+
     protected static function newFactory()
     {
         return \App\Core\UserManagement\Database\Factories\EmployeeFactory::new();

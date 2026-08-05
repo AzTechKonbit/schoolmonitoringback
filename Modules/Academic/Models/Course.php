@@ -39,6 +39,11 @@ class Course extends Model
     {
         return $this->hasMany(Schedule::class);
     }
+
+    public function assignments(): HasMany
+    {
+        return $this->hasMany(Assignment::class);
+    }
 //TODO To add to provider other modules
 
 //    public function assignments(): HasMany

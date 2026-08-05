@@ -12,14 +12,17 @@ class BaseBuilder extends Builder
         $model = $this->getModel();
 
         if (is_string($relations)) {
-            $relations = [$relations => $callback];
+            $relations = $callback
+                ? [$relations => $callback]
+                : [$relations];
         }
 //        $relations = $this->parseWithRelations($relations);
 
         $existing = collect($relations)
             ->filter(function ($constraints, $relation) use ($model) {
-                return RelationRegistry::exists($model::class, $relation)
-                    || method_exists($model, $relation);
+                $name = is_string($relation) ? $relation : (string) $constraints;
+                return RelationRegistry::exists($model::class, $name)
+                    || method_exists($model, $name);
             })
             ->toArray();
 

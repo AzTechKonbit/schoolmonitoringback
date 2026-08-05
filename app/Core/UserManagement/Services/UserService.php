@@ -32,7 +32,7 @@ class UserService
         return $query->paginate($perPage);
     }
 
-    public function findById(int $id): ?User
+    public function findById(string|int $id): ?User
     {
         return User::with(['employee', 'student', 'parent', 'school'])->find($id);
     }

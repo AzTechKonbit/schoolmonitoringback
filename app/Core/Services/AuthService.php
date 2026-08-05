@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
-    public function register(array $data): User
+    public function register(array $data): array
     {
         return DB::transaction(function () use ($data) {
             $user = User::create([

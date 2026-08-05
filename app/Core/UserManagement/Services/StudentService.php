@@ -90,7 +90,7 @@ class StudentService
             'last_name' => $data['parent_last_name'] ?? $data['last_name'],
             'email' => $data['parent_email'] ?? null,
             'password' => bcrypt($data['password'] ?? 'parent123'),
-            'phone' => $data['parent_phone'] ?? $data['phone'],
+            'phone' => $data['parent_phone'] ?? $data['phone'] ?? null,
             'role' => 'parent',
             'school_id' => $data['school_id'],
         ]);
